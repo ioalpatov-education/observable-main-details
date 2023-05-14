@@ -21,9 +21,20 @@ code {
   gap: 1rem;
 }
 
+.details-container {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
 .loader-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+
+.repeat-btn {
+  margin-left: 1rem !important;
 }

@@ -6,9 +6,15 @@ import {
   CardActions,
   Button,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const ServiceCard = ({ item }) => {
-  const { id, name, price, content } = item;
+  const { id, name, price } = item;
+  const navigate = useNavigate();
+
+  const goToDetails = () => {
+    navigate(`/${id}/details`);
+  };
 
   return (
     <Card className="service-product" sx={{ maxWidth: 345 }}>
@@ -30,19 +36,12 @@ const ServiceCard = ({ item }) => {
           >
             {name}
           </Typography>
-          {!!content ? (
-            <Typography
-              className="service__desc"
-              variant="body2"
-              color="text.secondary"
-            >
-              {content.slice(0, 100)}...
-            </Typography>
-          ) : null}
         </CardContent>
       </div>
       <CardActions className="market__actions">
-        <Button size="small">Детали</Button>
+        <Button onClick={goToDetails} size="small">
+          Детали
+        </Button>
       </CardActions>
     </Card>
   );
@@ -53,7 +52,6 @@ ServiceCard.propTypes = {
     id: PropsTypes.number.isRequired,
     name: PropsTypes.string.isRequired,
     price: PropsTypes.number.isRequired,
-    content: PropsTypes.string,
   }),
 };
 

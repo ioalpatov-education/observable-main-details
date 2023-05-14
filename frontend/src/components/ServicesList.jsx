@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { sendRequestToReceiveServices } from "../store/slices/servicesSlice";
 import ServiceCard from "./ServiceCard";
-import { Alert, CircularProgress } from "@mui/material";
+import { Alert, CircularProgress, Button } from "@mui/material";
 
 const ServicesList = () => {
   const { items, loading, error } = useSelector((state) => state.services);
@@ -12,6 +12,10 @@ const ServicesList = () => {
   useEffect(() => {
     dispatch(sendRequestToReceiveServices());
   }, []);
+
+  const repeatRequest = () => {
+    dispatch(sendRequestToReceiveServices());
+  };
 
   const servicesList = !!items.length ? (
     <ul className="services-list">
@@ -33,7 +37,18 @@ const ServicesList = () => {
           <CircularProgress />
         </div>
       ) : !!error ? (
-        <Alert severity="error">{error.message}</Alert>
+        <Alert severity="error">
+          {error.message}
+          <Button
+            className="repeat-btn"
+            onClick={repeatRequest}
+            size="small"
+            variant="contained"
+            color="error"
+          >
+            Повторить
+          </Button>
+        </Alert>
       ) : (
         servicesList
       )}
